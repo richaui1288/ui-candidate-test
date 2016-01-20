@@ -1,22 +1,29 @@
      // Example unit test function
      function divide( a, b ) {
         // To see the test pass, uncomment the following line
-        //return a / b;
+        return a / b;
      }
 
      // Write a function that takes a single argument (a string) and returns the string reversed.
      function reverseString(str) {
-         // FILL THIS IN
+          var o = '';
+          for (var i = str.length - 1; i >= 0; i--)
+            o += str[i];
+          return o;
      }
 
      // Write a function that takes an array of numbers and returns the minimum value
      function findMinValue(values) {
-         // FILL THIS IN
+         return values.sort()[1];
      }
 
      // Write a function that takes an array and returns the distinct values only (i.e. removes duplicates)
      function findDistinctValues(values) {
-         // FILL THIS IN
+          var a = [];
+         for (var i=0, l=values.length; i<l; i++)
+                if (a.indexOf(values[i]) === -1)
+                    a.push(values[i]);
+            return a;
      }
 
      // Write a function that logs the numbers from 1 to 100 to the console.
@@ -24,7 +31,17 @@
      // For multiples of five print "Buzz".
      // For numbers which are multiples of both three and five print "FizzBuzz".
      function doFizzBuzz() {
-         // FILL THIS IN
+        for (var i=1; i <= 100; i++){
+            if( i % 3 && i % 5 ) {
+                console.log("FizzBuzz")
+            } else if( i % 3 == 0 ) {
+                    console.log("Fizz");
+            }else if( i % 5 == 0 ) {
+                    console.log("Buzz")
+            }else{
+                    console.log(i)
+            }
+        }
      }
 
      // You have a master array of strings, where each element is a fruit name.
@@ -32,7 +49,7 @@
      // For the purpose of the exercise, we will call the master array fruits and the second array fruitsToRemove.
      // Write the function that will remove the values contained in fruitsToRemove from the array fruits.
      function removeFruits(fruits, fruitsToRemove) {
-         // FILL THIS IN
+        return fruits.filter(function(x) { return fruitsToRemove.indexOf(x) < 0 })
      }
 
      // Write a function to push either a simple value or an array of values onto a specified array.
@@ -45,20 +62,28 @@
 
      // Given a string, sourceStr, write some code that will split this string using comma as your delimiter, and producing an empty array if the string is empty.
      function splitListStrUsingComma(sourceStr) {
-         // FILL THIS IN
+          return sourceStr.split(",");
+
      }
 
      // Write a function that will take any number of arguments and return their sum
      function sum() {
          // FILL THIS IN
+        var i, sum = 0;
+        for(i = 0; i < arguments.length; i++) {
+            sum += arguments[i];
+        }
+        return sum;
      }
 
      // Write a function that will return true if a specified string consists of only whitespace.
-     function isOnlyWhitespace(sourceStr) {
-         // FILL THIS IN
-     }
+    
 
      // write an example of a javascript closure
+     function method(name) {
+        var test = 10;
+        var say = function() { console.log(text); }
+     }
 
      // define a json object that represents a collection of people.
      // each person should have the following properties
@@ -68,7 +93,33 @@
      // - state
      // - zip
      // - a collection of phone numbers (home, work, mobile)
+      var people = [
 
+        {
+            "fname" : "fname1",
+            "lname" : "lname1",
+            "city"  : "city1",
+            "state" : "state1",
+            "zip"   : "zip1",
+            "phone" : {
+                        "home"  : "123",
+                        "work"  : "1234",
+                        "mobile": "12345"
+                      }
+        },
+        {
+            "fname" : "fname2",
+            "lname" : "lname2",
+            "city"  : "city2",
+            "state" : "state2",
+            "zip"   : "zip2",
+            "phone" : {
+                        "home"  : "321",
+                        "work"  : "4311",
+                        "mobile": "54321"
+                      }
+        }
+      ];
 
      // Create a javascript object (DataTable) with the following:
      // A private columns property (string array)
@@ -81,6 +132,37 @@
      // .addColumns('column1', 'column2', 'column3');
      // .addRow('value1A', 'value1B', 'value1C');
      // .addRow('value2A', 'value2B', 'value2C');
+
+     var DataTable = function(){
+
+            var dataTable= {},columns,rows,
+            addColumns = function(){
+               
+                dataTable = arguments;
+
+                console.log(dataTable);
+            },
+            addRows = function(){
+                console.log(dataTable[0]);
+                for(var i=0; i<arguments.length; i++){
+                    if(typeof dataTable[i] === "array"){
+                        dataTable[i].push(arguments[i]);
+                    }else{
+                        dataTable[i] = [arguments[i]];
+                    }
+                }
+            },
+            getData = function(){
+                return dataTable;
+            };
+
+        return{
+            addColumns:addColumns,
+            addRows:addRows,
+            getData:getData
+
+        }
+     };
 
      // within div1, programatically create a
      // SELECT element (with multiple items) and a button.
